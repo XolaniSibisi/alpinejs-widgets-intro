@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine JS</title>
+    <script src='./counter.js'defer></script>
+    <script src="./index.js" defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    
+    <style>
+        .intro{
+            border: 2px solid black;
+            padding: 1em;
+            margin: 1em;
+            margin-bottom: 0.5em;
+            border-radius: 0.5em;
+            flex: 1;
+        }
+        .Alpineflex{
+            display: flex;
+        }
+        h2,h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>AlpineJS Tutorial</h2>
+    <div class="Alpineflex">
+    <div class="intro" x-data= "{title : 'Hello Alpine'}" >
+        <p x-text="title"></p>
+        <button x-on:click="title = 'Alpine Rocks!' ">Click me</button>
+    </div>
+    <div class="intro" x-data="{count : 1}">
+        <p x-text="count"></p>
+        <button x-on:click="count++">Count Up</button>
+        <button x-on:click="count--">Count Down</button>
+    </div>
+    </div>
+    <div class="intro" x-data="{countdown : 60}"
+                       x-init="setInterval(function(){
+                               countdown--;
+                               }, 1000);
+                               ">
+       <h1 x-text="countdown"></h1>
+    </div>
+    <div class="intro" x-data="{show : false}">
+        <button x-on:click="show =!show">Show</button>
+        <div x-show.transition="show">Hello</div>
+    </div>
+    <div class="intro" x-data="{title : 'AlpineJS is awesome'}">
+        <p x-text="title"></p>
+        <input type="text" x-model="title">
+    </div>
+    <div class="intro" x-data="{code : '<p>Dynamic Paragraph</p>'}">
+        <div x-html="code"></div>
+    </div>
+    <div class="intro" x-data="{code : '<p>Dynamic Paragraph</p>'}">
+        <div x-ref="sentence">I am a sentence</div>
+        <button x-on:click="$refs.sentence.innerText= 'I just changed' ">Change Sentence</button>
+    </div>
+    <div class="intro" x-data="{socks : 'blue'}">
+        <template x-if="socks=='blue'">
+            <p>My socks are blue</p>
+        </template>
+        <template x-if="socks=='green'">
+            <p>My socks are green</p>
+        </template>
+        <button @click="socks = 'green'">Change Sox</button>
+    </div>
+    <div class="intro" x-data="{groceries : ['Milk', 'Cheese', 'Eggs']}">
+        <p>Groceries</p>
+        <ul>
+            <template x-for="item in groceries">
+                <li x-text="item"></li>
+            </template>
+        </ul>
+    </div>
+    <div class="intro">
+        <h1>Counter with Javascript</h1>
+        <div class="counter" > </div>
+        <div>
+              <button class="increment" >Increment</button>
+              <button class="decrement" >Decrement</button>
+        </div>
+   </div>
+
+   <div class="intro" x-data="counter">
+    <h1>Counter with External Javascript</h1>
+    <div x-text="num">
+    </div>
+    
+    <div>
+        <button x-on:click="increment">Increase</button>
+        <button x-on:click="decrement">Decrease</button>
+        <button x-on:click="reset">Clear</button>
+    </div>
+    
+</div>
+
+</body>
+</html>
